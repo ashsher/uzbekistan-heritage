@@ -1,0 +1,62 @@
+{% extends 'history/base.html' %}
+
+{% block title %}Home - Uzbekistan Heritage{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h1>Welcome to Uzbekistan Heritage</h1>
+    <p>Explore the rich history of Uzbekistan through its periods, figures, and monuments</p>
+</div>
+
+<div class="stats">
+    <div class="stat-card">
+        <h2>{{ periods_count }}</h2>
+        <p>Time Periods</p>
+    </div>
+    <div class="stat-card">
+        <h2>{{ figures_count }}</h2>
+        <p>Historical Figures</p>
+    </div>
+    <div class="stat-card">
+        <h2>{{ sites_count }}</h2>
+        <p>Historical Sites</p>
+    </div>
+</div>
+
+<section class="section">
+    <h2>Recent Historical Figures</h2>
+    <div class="cards">
+        {% for figure in recent_figures %}
+        <div class="card">
+            {% if figure.image %}
+                <img src="{{ figure.image.url }}" alt="{{ figure.name }}">
+            {% else %}
+                <div class="no-image">No Image</div>
+            {% endif %}
+            <h3>{{ figure.name }}</h3>
+            <p class="role">{{ figure.get_role_display }}</p>
+            <p class="years">{{ figure.birth_year }} - {{ figure.death_year }}</p>
+            <a href="{% url 'history:figure_detail' figure.pk %}" class="btn">View Details</a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="section">
+    <h2>Featured Historical Sites</h2>
+    <div class="cards">
+        {% for site in featured_sites %}
+        <div class="card">
+            {% if site.image %}
+                <img src="{{ site.image.url }}" alt="{{ site.name }}">
+            {% else %}
+                <div class="no-image">No Image</div>
+            {% endif %}
+            <h3>{{ site.name }}</h3>
+            <p class="city">📍 {{ site.get_city_display }}</p>
+            <a href="{% url 'history:site_detail' site.pk %}" class="btn">View Details</a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

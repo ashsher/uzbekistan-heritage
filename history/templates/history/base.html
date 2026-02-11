@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Uzbekistan Heritage{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'history/css/style.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="{% url 'history:home' %}" class="logo">Uzbekistan Heritage</a>
+            <ul class="nav-links">
+                <li><a href="{% url 'history:home' %}">Home</a></li>
+                <li><a href="{% url 'history:period_list' %}">Time Periods</a></li>
+                <li><a href="{% url 'history:figure_list' %}">Historical Figures</a></li>
+                <li><a href="{% url 'history:site_list' %}">Sites</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'history:figure_create' %}">Add Figure</a></li>
+                    <li><a href="{% url 'history:profile' %}">Profile</a></li>
+                    <li><a href="{% url 'history:logout' %}">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'history:login' %}">Login</a></li>
+                    <li><a href="{% url 'history:register' %}">Register</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <main class="container">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Uzbekistan Heritage. Preserving our history for future generations.</p>
+        </div>
+    </footer>
+</body>
+</html>

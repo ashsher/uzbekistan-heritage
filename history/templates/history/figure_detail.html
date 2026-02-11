@@ -1,0 +1,55 @@
+{% extends 'history/base.html' %}
+
+{% block title %}{{ figure.name }} - Uzbekistan Heritage{% endblock %}
+
+{% block content %}
+<div class="detail-page">
+    <div class="detail-header">
+        <h1>{{ figure.name }}</h1>
+        <p class="subtitle">{{ figure.get_role_display }} | {{ figure.birth_year }} - {{ figure.death_year }}</p>
+    </div>
+
+    {% if figure.image %}
+    <div class="detail-image">
+        <img src="{{ figure.image.url }}" alt="{{ figure.name }}">
+    </div>
+    {% endif %}
+
+    <div class="detail-content">
+        <h2>Biography</h2>
+        <p>{{ figure.biography }}</p>
+
+        <div class="info-box">
+            <h3>Quick Facts</h3>
+            <ul>
+                <li><strong>Role:</strong> {{ figure.get_role_display }}</li>
+                <li><strong>Time Period:</strong> <a href="{% url 'history:period_detail' figure.time_period.pk %}">{{ figure.time_period.name }}</a></li>
+                <li><strong>Birth Year:</strong> {{ figure.birth_year|default:"Unknown" }}</li>
+                <li><strong>Death Year:</strong> {{ figure.death_year|default:"Unknown" }}</li>
+            </ul>
+        </div>
+
+        {% if user.is_authenticated %}
+        <div class="action-buttons">
+            <a href="{% url 'history:figure_edit' figure.pk %}" class="btn btn-warning">Edit</a>
+            <a href="{% url 'history:figure_delete' figure.pk %}" class="btn btn-danger">Delete</a>
+        </div>
+        {% endif %}
+    </div>
+
+    {% if related_sites %}
+    <div class="related-section">
+        <h2>Related Historical Sites</h2>
+        <div class="cards">
+            {% for site in related_sites %}
+            <div class="card">
+                <h3>{{ site.name }}</h3>
+                <p class="city">📍 {{ site.get_city_display }}</p>
+                <a href="{% url 'history:site_detail' site.pk %}" class="btn btn-sm">View</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'history/base.html' %}
+
+{% block title %}Delete {{ figure.name }} - Uzbekistan Heritage{% endblock %}
+
+{% block content %}
+<div class="form-page">
+    <h1>Delete Historical Figure</h1>
+    
+    <div class="warning-box">
+        <p>Are you sure you want to delete <strong>{{ figure.name }}</strong>?</p>
+        <p>This action cannot be undone.</p>
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-actions">
+            <button type="submit" class="btn btn-danger">Yes, Delete</button>
+            <a href="{% url 'history:figure_detail' figure.pk %}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

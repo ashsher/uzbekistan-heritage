@@ -1,0 +1,28 @@
+{% extends 'history/base.html' %}
+
+{% block title %}Time Periods - Uzbekistan Heritage{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Historical Time Periods</h1>
+    <p>Explore different eras of Uzbekistan's rich history</p>
+</div>
+
+<div class="timeline">
+    {% for period in periods %}
+    <div class="timeline-item">
+        <div class="timeline-content">
+            <div class="period-header">
+                <h2>{{ period.name }}</h2>
+                <span class="years">{{ period.start_year }} - {% if period.end_year %}{{ period.end_year }}{% else %}Present{% endif %}</span>
+            </div>
+            {% if period.image %}
+                <img src="{{ period.image.url }}" alt="{{ period.name }}">
+            {% endif %}
+            <p>{{ period.description|truncatewords:30 }}</p>
+            <a href="{% url 'history:period_detail' period.pk %}" class="btn">Learn More</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

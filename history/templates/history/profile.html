@@ -1,0 +1,29 @@
+{% extends 'history/base.html' %}
+
+{% block title %}Profile - Uzbekistan Heritage{% endblock %}
+
+{% block content %}
+<div class="profile-page">
+    <h1>Welcome, {{ user.username }}!</h1>
+    
+    <div class="profile-section">
+        <h2>Your Contributions</h2>
+        
+        {% if user_figures %}
+        <div class="cards">
+            {% for figure in user_figures %}
+            <div class="card">
+                <h3>{{ figure.name }}</h3>
+                <p class="role">{{ figure.get_role_display }}</p>
+                <p class="date">Added: {{ figure.created_at|date:"M d, Y" }}</p>
+                <a href="{% url 'history:figure_detail' figure.pk %}" class="btn btn-sm">View</a>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p>You haven't added any historical figures yet.</p>
+        <a href="{% url 'history:figure_create' %}" class="btn">Add Your First Figure</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

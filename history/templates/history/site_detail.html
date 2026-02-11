@@ -1,0 +1,49 @@
+{% extends 'history/base.html' %}
+
+{% block title %}{{ site.name }} - Uzbekistan Heritage{% endblock %}
+
+{% block content %}
+<div class="detail-page">
+    <div class="detail-header">
+        <h1>{{ site.name }}</h1>
+        <p class="subtitle">📍 {{ site.get_city_display }} {% if site.built_year %}| Built: {{ site.built_year }}{% endif %}</p>
+    </div>
+
+    {% if site.image %}
+    <div class="detail-image">
+        <img src="{{ site.image.url }}" alt="{{ site.name }}">
+    </div>
+    {% endif %}
+
+    <div class="detail-content">
+        <h2>About This Site</h2>
+        <p>{{ site.description }}</p>
+    </div>
+
+    {% if time_periods %}
+    <div class="related-section">
+        <h2>Related Time Periods</h2>
+        <div class="tags">
+            {% for period in time_periods %}
+            <a href="{% url 'history:period_detail' period.pk %}" class="tag">{{ period.name }}</a>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if related_figures %}
+    <div class="related-section">
+        <h2>Related Historical Figures</h2>
+        <div class="cards">
+            {% for figure in related_figures %}
+            <div class="card">
+                <h3>{{ figure.name }}</h3>
+                <p class="role">{{ figure.get_role_display }}</p>
+                <a href="{% url 'history:figure_detail' figure.pk %}" class="btn btn-sm">View</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

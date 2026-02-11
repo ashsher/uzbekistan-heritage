@@ -1,0 +1,32 @@
+{% extends 'history/base.html' %}
+
+{% block title %}Login - Uzbekistan Heritage{% endblock %}
+
+{% block content %}
+<div class="auth-page">
+    <div class="auth-box">
+        <h1>Welcome Back</h1>
+        <p>Login to your account</p>
+        
+        <form method="post" class="form">
+            {% csrf_token %}
+            
+            {% for field in form %}
+            <div class="form-group">
+                <label>{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}
+                    {% for error in field.errors %}
+                        <span class="error">{{ error }}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            {% endfor %}
+
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </form>
+        
+        <p class="auth-link">Don't have an account? <a href="{% url 'history:register' %}">Register here</a></p>
+    </div>
+</div>
+{% endblock %}

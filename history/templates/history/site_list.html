@@ -1,0 +1,30 @@
+{% extends 'history/base.html' %}
+
+{% block title %}Historical Sites - Uzbekistan Heritage{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Historical Sites</h1>
+    <p>Discover the architectural wonders of Uzbekistan</p>
+</div>
+
+<div class="cards">
+    {% for site in sites %}
+    <div class="card">
+        {% if site.image %}
+            <img src="{{ site.image.url }}" alt="{{ site.name }}">
+        {% else %}
+            <div class="no-image">No Image</div>
+        {% endif %}
+        <h3>{{ site.name }}</h3>
+        <p class="city">📍 {{ site.get_city_display }}</p>
+        {% if site.built_year %}
+        <p class="year">Built: {{ site.built_year }}</p>
+        {% endif %}
+        <a href="{% url 'history:site_detail' site.pk %}" class="btn">View Details</a>
+    </div>
+    {% empty %}
+    <p>No historical sites found.</p>
+    {% endfor %}
+</div>
+{% endblock %}
