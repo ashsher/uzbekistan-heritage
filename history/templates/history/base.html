@@ -17,8 +17,7 @@
                 <li><a href="{% url 'history:figure_list' %}">Historical Figures</a></li>
                 <li><a href="{% url 'history:site_list' %}">Sites</a></li>
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'history:figure_create' %}">Add Figure</a></li>
-                    <li><a href="{% url 'history:profile' %}">Profile</a></li>
+                    <li><a href="{% url 'history:profile' %}">Profile ({{ user.username }})</a></li>
                     <li><a href="{% url 'history:logout' %}">Logout</a></li>
                 {% else %}
                     <li><a href="{% url 'history:login' %}">Login</a></li>

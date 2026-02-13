@@ -4,10 +4,50 @@
 
 {% block content %}
 <div class="profile-page">
-    <h1>Welcome, {{ user.username }}!</h1>
-    
+    <div class="profile-header">
+        <div class="profile-avatar">
+            <div class="avatar-circle">{{ user.username|slice:":1"|upper }}</div>
+        </div>
+        <div class="profile-info">
+            <h1>{{ user.username }}</h1>
+            <p class="profile-email">📧 {{ user.email|default:"No email provided" }}</p>
+            <p class="profile-joined">📅 Member since {{ user.date_joined|date:"F Y" }}</p>
+            <p class="profile-contributions">🏆 Total Contributions: <strong>{{ total_contributions }}</strong></p>
+        </div>
+    </div>
+
+    <div class="contribution-actions">
+        <a href="{% url 'history:period_create' %}" class="btn">➕ Add Time Period</a>
+        <a href="{% url 'history:figure_create' %}" class="btn">➕ Add Historical Figure</a>
+        <a href="{% url 'history:site_create' %}" class="btn">➕ Add Historical Site</a>
+    </div>
+
+    <!-- Time Periods -->
     <div class="profile-section">
-        <h2>Your Contributions</h2>
+        <h2>Your Time Periods ({{ user_periods.count }})</h2>
+        
+        {% if user_periods %}
+        <div class="cards">
+            {% for period in user_periods %}
+            <div class="card">
+                <h3>{{ period.name }}</h3>
+                <p class="years">{{ period.start_year }} - {% if period.end_year %}{{ period.end_year }}{% else %}Present{% endif %}</p>
+                <p class="date">Added: {{ period.created_at|date:"M d, Y" }}</p>
+                <div class="card-actions">
+                    <a href="{% url 'history:period_detail' period.pk %}" class="btn btn-sm">View</a>
+                    <a href="{% url 'history:period_edit' period.pk %}" class="btn btn-sm btn-warning">Edit</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="empty-message">You haven't added any time periods yet.</p>
+        {% endif %}
+    </div>
+
+    <!-- Historical Figures -->
+    <div class="profile-section">
+        <h2>Your Historical Figures ({{ user_figures.count }})</h2>
         
         {% if user_figures %}
         <div class="cards">
@@ -15,14 +55,40 @@
             <div class="card">
                 <h3>{{ figure.name }}</h3>
                 <p class="role">{{ figure.get_role_display }}</p>
+                <p class="years">{{ figure.birth_year }} - {{ figure.death_year }}</p>
                 <p class="date">Added: {{ figure.created_at|date:"M d, Y" }}</p>
-                <a href="{% url 'history:figure_detail' figure.pk %}" class="btn btn-sm">View</a>
+                <div class="card-actions">
+                    <a href="{% url 'history:figure_detail' figure.pk %}" class="btn btn-sm">View</a>
+                    <a href="{% url 'history:figure_edit' figure.pk %}" class="btn btn-sm btn-warning">Edit</a>
+                </div>
             </div>
             {% endfor %}
         </div>
         {% else %}
-        <p>You haven't added any historical figures yet.</p>
-        <a href="{% url 'history:figure_create' %}" class="btn">Add Your First Figure</a>
+        <p class="empty-message">You haven't added any historical figures yet.</p>
+        {% endif %}
+    </div>
+
+    <!-- Historical Sites -->
+    <div class="profile-section">
+        <h2>Your Historical Sites ({{ user_sites.count }})</h2>
+        
+        {% if user_sites %}
+        <div class="cards">
+            {% for site in user_sites %}
+            <div class="card">
+                <h3>{{ site.name }}</h3>
+                <p class="city">📍 {{ site.get_city_display }}</p>
+                <p class="date">Added: {{ site.created_at|date:"M d, Y" }}</p>
+                <div class="card-actions">
+                    <a href="{% url 'history:site_detail' site.pk %}" class="btn btn-sm">View</a>
+                    <a href="{% url 'history:site_edit' site.pk %}" class="btn btn-sm btn-warning">Edit</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="empty-message">You haven't added any historical sites yet.</p>
         {% endif %}
     </div>
 </div>

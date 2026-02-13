@@ -7,6 +7,12 @@
     <div class="detail-header">
         <h1>{{ site.name }}</h1>
         <p class="subtitle">📍 {{ site.get_city_display }} {% if site.built_year %}| Built: {{ site.built_year }}{% endif %}</p>
+        {% if user.is_authenticated %}
+        <div class="action-buttons" style="justify-content: center; margin-top: 1rem;">
+            <a href="{% url 'history:site_edit' site.pk %}" class="btn btn-warning">Edit</a>
+            <a href="{% url 'history:site_delete' site.pk %}" class="btn btn-danger">Delete</a>
+        </div>
+        {% endif %}
     </div>
 
     {% if site.image %}

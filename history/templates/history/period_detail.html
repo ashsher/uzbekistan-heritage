@@ -7,6 +7,12 @@
     <div class="detail-header">
         <h1>{{ period.name }}</h1>
         <p class="period-years">{{ period.start_year }} - {% if period.end_year %}{{ period.end_year }}{% else %}Present{% endif %}</p>
+        {% if user.is_authenticated %}
+        <div class="action-buttons" style="justify-content: center; margin-top: 1rem;">
+            <a href="{% url 'history:period_edit' period.pk %}" class="btn btn-warning">Edit</a>
+            <a href="{% url 'history:period_delete' period.pk %}" class="btn btn-danger">Delete</a>
+        </div>
+        {% endif %}
     </div>
 
     {% if period.image %}

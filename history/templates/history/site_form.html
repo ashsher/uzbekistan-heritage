@@ -1,0 +1,57 @@
+{% extends 'history/base.html' %}
+
+{% block title %}{{ title }} - Uzbekistan Heritage{% endblock %}
+
+{% block content %}
+<div class="form-page">
+    <h1>{{ title }}</h1>
+    
+    <form method="post" enctype="multipart/form-data" class="form">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="{{ form.name.id_for_label }}">Name:</label>
+            {{ form.name }}
+            {% if form.name.errors %}
+                <span class="error">{{ form.name.errors }}</span>
+            {% endif %}
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="{{ form.city.id_for_label }}">City:</label>
+                {{ form.city }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.built_year.id_for_label }}">Built Year (optional):</label>
+                {{ form.built_year }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.description.id_for_label }}">Description:</label>
+            {{ form.description }}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.time_periods.id_for_label }}">Related Time Periods:</label>
+            {{ form.time_periods }}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.related_figures.id_for_label }}">Related Historical Figures:</label>
+            {{ form.related_figures }}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.image.id_for_label }}">Image:</label>
+            {{ form.image }}
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a href="{% url 'history:site_list' %}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

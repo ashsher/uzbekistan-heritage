@@ -6,6 +6,9 @@
 <div class="page-header">
     <h1>Historical Sites</h1>
     <p>Discover the architectural wonders of Uzbekistan</p>
+    {% if user.is_authenticated %}
+    <a href="{% url 'history:site_create' %}" class="btn">Add New Historical Site</a>
+    {% endif %}
 </div>
 
 <div class="cards">

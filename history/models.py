@@ -9,6 +9,7 @@ class TimePeriod(models.Model):
     end_year = models.IntegerField(null=True, blank=True)  # null if ongoing
     description = models.TextField()
     image = models.ImageField(upload_to='periods/', null=True, blank=True)
+    created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     
     class Meta:

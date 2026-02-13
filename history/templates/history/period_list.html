@@ -6,6 +6,9 @@
 <div class="page-header">
     <h1>Historical Time Periods</h1>
     <p>Explore different eras of Uzbekistan's rich history</p>
+    {% if user.is_authenticated %}
+    <a href="{% url 'history:period_create' %}" class="btn">Add New Time Period</a>
+    {% endif %}
 </div>
 
 <div class="timeline">
