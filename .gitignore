@@ -1,4 +1,4 @@
-# Python
+#Python
 *.pyc
 __pycache__/
 *.py[cod]
@@ -9,7 +9,7 @@ venv/
 env/
 ENV/
 
-# Django
+#Django
 *.log
 db.sqlite3
 db.sqlite3-journal
@@ -17,18 +17,18 @@ db.sqlite3-journal
 /staticfiles
 .env
 
-# IDE
+#IDE
 .vscode/
 .idea/
 *.swp
 *.swo
 
-# OS
+#OS
 .DS_Store
 Thumbs.db
 
-# Docker
+#Docker
 *.env.local
 
-# Scripts
+#Scripts
 scripts/*.log
