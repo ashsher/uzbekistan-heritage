@@ -13,7 +13,7 @@ A Django web application showcasing Uzbekistan's historical periods, figures, an
 
 **Admin Account:**
 - Username: `admin`
-- Password: `admin123`
+- Password: `admin`
 
 ## Features
 
