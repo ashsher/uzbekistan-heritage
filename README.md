@@ -211,22 +211,22 @@ docker compose exec web flake8 history/ uzbekistan_heritage/
 ## Project Structure
 ```
 uzbekistan-heritage/
-├── .github/workflows/    # CI/CD pipeline
-├── history/              # Main Django app
-│   ├── migrations/       # Database migrations
-│   ├── static/           # CSS files
-│   ├── templates/        # HTML templates
-│   ├── models.py         # Database models
-│   ├── views.py          # View logic
-│   ├── forms.py          # Django forms
-│   └── tests.py          # Automated tests
-├── nginx/                # Nginx configuration
-├── uzbekistan_heritage/  # Django project settings
-├── Dockerfile            # Multi-stage Docker build
-├── docker-compose.yml    # Service orchestration
-├── requirements.txt      # Python dependencies
-├── .env.example          # Environment template
-└── README.md             # This file
+├── .github/workflows/
+├── history/
+│   ├── migrations/
+│   ├── static/
+│   ├── templates/
+│   ├── models.py
+│   ├── views.py
+│   ├── forms.py
+│   └── tests.py
+├── nginx/
+├── uzbekistan_heritage/
+├── Dockerfile
+├── docker-compose.yml
+├── requirements.txt
+├── .env.example
+└── README.md
 ```
 
 ## Security Features
