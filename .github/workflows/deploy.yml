@@ -101,10 +101,12 @@ jobs:
         port: 22
         script: |
           cd /root/uzbekistan-heritage
+          git stash
           git pull origin main
-          docker compose pull
           docker compose down
+          docker compose build web --no-cache
           docker compose up -d
+          sleep 40
           docker compose exec -T web python manage.py migrate
           docker compose exec -T web python manage.py collectstatic --noinput
           docker image prune -f
