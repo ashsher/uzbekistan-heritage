@@ -142,7 +142,7 @@ The project uses GitHub Actions for automated deployment.
 3. **Deploy** - SSH to server, update containers, run migrations
 
 **Triggered on:** Push to main branch  
-**Deployment time:** 5-10 minutes  
+**Deployment time:** 3-5 minutes  
 **GitHub Actions:** https://github.com/ashsher/uzbekistan-heritage/actions
 
 ## Production Deployment
